@@ -1,0 +1,111 @@
+local kmap = vim.keymap.set
+-- Go to Normal Mode
+kmap("i", "jk", "<Esc>", { silent = true})
+kmap("i", "kk", "<Esc>", { silent = true })
+
+-- Desactiva el carácter raro de los audífonos
+kmap("i", "", "<nop>", { silent = true})
+
+-- Toggle Wrap
+kmap("n", "<leader>u", "<cmd>set wrap!<CR>", { desc = "Wrap"})
+
+-- Save Buffer
+kmap("n", "<leader>s", "<cmd>w<CR>", { desc = "Save"})
+
+-- Quit Buffer
+kmap("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit"})
+
+-- Yank all Text
+kmap("n", "<leader>Y", "<cmd>%y<CR>", { desc = "Yank All Text"})
+
+-- Go to left window
+kmap("n", "<C-h>", "<C-w>h", { desc = "Go to left window"})
+
+-- Go to right window
+kmap("n", "<C-l>", "<C-w>l", { desc = "Go to right window"})
+
+-- Indent backward
+kmap("n", "<", "<<", { desc = "Indent backward (Normal mode)"})
+
+-- Indent forward
+kmap("n", ">", ">>", { desc = "Indent forward(Normal mode)"})
+
+-- Indent backward (Visual Mode)
+kmap("v", "<", "<gv", { desc = "Indent backward (Visual mode)"})
+
+-- Indent forward (Visual Mode)
+kmap("v", ">", ">gv", { desc = "Indent forward(Visual mode)"})
+
+-- Enter Normal Mode (Terminal Mode)
+kmap("t", "<Esc>", "<C-\\><C-n>", { desc = "Enter Normal Mode(Terminal)", silent = true })
+
+-- Go to upper window (Terminal)
+kmap("t", "<C-j>", "<C-\\><C-N><C-j>", { desc = "General | Go to upper window(Terminal)", silent = true })
+
+-- Go to lower window (Terminal)
+kmap("t", "<C-k>", "<C-\\><C-N><C-k>", { desc = "General | Go to lower window(Terminal)", silent = true })
+
+-- Go to left window (Terminal)
+kmap("t", "<C-h>", "<C-\\<C-N><C-h>", { desc = "General | Go to left window(Terminal)", silent = true })
+
+-- Go to right window (Terminal)
+kmap("t", "<C-l>", "<C-\\><C-N><C-l>", { desc = "General | Go to right window(Terminal)", silent = true })
+
+-- Save current session
+kmap("n", "<leader>Qs", function()
+  require("persistence").save()
+  print("Sesión guardada manualmente ✅")
+end, { desc = "Guardar sesión manualmente" })
+
+-- Session list
+kmap("n", "<leader>QL", function()
+  require("persistence").load()
+end, { desc = "Listar sesiones guardadas" })
+
+-- Load last session
+kmap("n", "<leader>Qls", function()
+  require("persistence").load({ last = true })
+end, { desc = "Cargar última sesión" })
+
+-- Delete all sessions
+kmap("n", "<leader>Qd", function()
+  vim.fn.delete(vim.fn.stdpath("state") .. "/sessions", "rf")
+  vim.fn.mkdir(vim.fn.stdpath("state") .. "/sessions", "p")
+  print("Sesiones eliminadas 🧹")
+end, { desc = "Eliminar todas las sesiones" })
+
+-- Buffers
+kmap("n", "<leader>l", "<cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
+kmap("n", "<leader>h", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
+kmap("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Close Buffer" })
+kmap("n", "<leader>b1", "<cmd>BufferLineGoToBuffer 1<CR>", { desc = "Go to Buffer [1]" })
+kmap("n", "<leader>b2", "<cmd>BufferLineGoToBuffer 2<CR>", { desc = "Go to Buffer [2]" })
+kmap("n", "<leader>b3", "<cmd>BufferLineGoToBuffer 3<CR>", { desc = "Go to Buffer [3]" })
+kmap("n", "<leader>b4", "<cmd>BufferLineGoToBuffer 4<CR>", { desc = "Go to Buffer [4]" })
+
+-- Fzf
+kmap("n", "<leader>ff0", "<cmd>FzfLua files <CR>", { desc = "Open Files (cwd)" })
+kmap("n", "<leader>ff1", "<cmd>FzfLua files cwd=/ <CR>", { desc = "Open Files (root)" })
+kmap("n", "<leader>fb", "<cmd>FzfLua buffers <CR>", { desc = "Open Buffers" })
+kmap("n", "<leader>fr", "<cmd>FzfLua oldfiles <CR>", { desc = "Recent Files" })
+kmap("n", "<leader>fs0", "<cmd>FzfLua lgrep_curbuf <CR>", { desc = "Find Sentence in Buffer" })
+kmap("n", "<leader>fs1", "<cmd>FzfLua live_grep <CR>", { desc = "Find Sentence (CWD)" })
+kmap("n", "<leader>fs2", "<cmd>FzfLua live_grep cwd=/ <CR>", { desc = "Find Sentence (Root)" })
+
+-- Lazy
+kmap("n", "<leader>pc", "<cmd>Lazy clean<CR>", { desc = "Lazy | Clean", silent = true })
+kmap("n", "<leader>pC", "<cmd>Lazy check<CR>", { desc = "Lazy | Check", silent = true })
+kmap("n", "<leader>pd", "<cmd>Lazy debug<CR>", { desc = "Lazy | Debug", silent = true })
+kmap("n", "<leader>pi", "<cmd>Lazy install<CR>", { desc = "Lazy | Install", silent = true })
+kmap("n", "<leader>ps", "<cmd>Lazy sync<CR>", { desc = "Lazy | Sync", silent = true })
+kmap("n", "<leader>pl", "<cmd>Lazy log<CR>", { desc = "Lazy | Log", silent = true })
+kmap("n", "<leader>ph", "<cmd>Lazy home<CR>", { desc = "Lazy | Home", silent = true })
+kmap("n", "<leader>pH", "<cmd>Lazy help<CR>", { desc = "Lazy | Help", silent = true })
+kmap("n", "<leader>pp", "<cmd>Lazy profile<CR>", { desc = "Lazy | Profile", silent = true })
+kmap("n", "<leader>pu", "<cmd>Lazy update<CR>", { desc = "Lazy | Update", silent = true })
+
+-- Yazi
+kmap("n", "<leader>y", "<cmd>Yazi cwd <CR>", { desc = "Open the File Manager (cwd) "})
+-- Oil
+--vim.keymap.set("n", "-", ":Oil<CR>", { desc = "Open parent directory" })
+--vim.keymap.set( "n", "<leader>m", ":Oil --float<CR>", { desc = "Open Oil (floating)" })
