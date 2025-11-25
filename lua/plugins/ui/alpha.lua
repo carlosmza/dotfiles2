@@ -25,12 +25,12 @@ return {
 
     dashboard.section.buttons.val = {
       dashboard.button("e",  "   New file", ":ene <CR>"),
-      dashboard.button("y",  "   Open files with Yazi", ":Yazi <CR>"),
+      dashboard.button("-",  "   Open files with Fyler", ":Fyler <CR>"),
       dashboard.button("r",  "🖿  Recent files", ":FzfLua oldfiles <CR>"),
       dashboard.button("s0", "   Find sentence (cwd)", ":FzfLua live_grep <CR>"),
-      dashboard.button("s1", "   Find sentence (home)", ":FzfLua live_grep cwd=/home/carlos/ <CR>"),
+			-- dashboard.button("s1", "   Find sentence (home)", ":FzfLua live_grep cwd=/home/carlos/ <CR>"),
       dashboard.button("f0", "󰮗   Find files (cwd)", ":FzfLua files <CR>"),
-      dashboard.button("f1", "󰮗   Find files (root)", ":FzfLua files cwd=/ <CR>"),
+      -- dashboard.button("f1", "󰮗   Find files (root)", ":FzfLua files cwd=/ <CR>"),
       dashboard.button("q",  "   Quit NVIM", ":qa <CR>"),
     }
     local lazy_stats = require("lazy").stats()

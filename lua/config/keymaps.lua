@@ -1,8 +1,23 @@
 local kmap = vim.keymap.set
+kmap("n", "gdx", ":belowright split | lua vim.lsp.buf.definition()<CR>", {desc='below definition'})
+kmap("n", "gdv", ":vsplit | lua vim.lsp.buf.definition()<CR>",{desc='vertical definition'})
+kmap("n", "gdt", ":tab split | lua vim.lsp.buf.definition()<CR>",{desc='tab definition'})
+
+-- Centrar el cursor
+kmap("n","j","jzz",{ noremap = true})
+kmap("n","k","kzz",{ noremap = true})
+kmap("n","l","lzz",{ noremap = true})
+kmap("n","h","hzz",{ noremap = true})
+-- Copy file path
+kmap('n', '<leader>yp', ":let @+=expand('%:.')<cr>", { desc = 'Copy relative path' })
+
+-- Increse / Decrease width
+kmap('n', '<C-<>', "<C-w><", { desc = 'Decrease window width'})
+kmap('n', '<C->>', "<C-w>>", { desc = 'Increse window width'}) -- No funciona, conflicto con ident backward (Normal mode)
 -- Go to Normal Mode
 kmap("i", "jk", "<Esc>", { silent = true})
 kmap("i", "kk", "<Esc>", { silent = true })
-
+kmap("i", "<C-c>", "<Esc>", { silent = true })
 -- Desactiva el carácter raro de los audífonos
 kmap("i", "", "<nop>", { silent = true})
 
@@ -18,14 +33,20 @@ kmap("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit"})
 -- Yank all Text
 kmap("n", "<leader>Y", "<cmd>%y<CR>", { desc = "Yank All Text"})
 
+
 -- Go to left window
 kmap("n", "<C-h>", "<C-w>h", { desc = "Go to left window"})
 
 -- Go to right window
 kmap("n", "<C-l>", "<C-w>l", { desc = "Go to right window"})
 
+-- Go to up window
+kmap("n", "<C-k>", "<C-w>k", { desc = "Go to up window"})
+
+-- Go to down window
+kmap("n", "<C-j>", "<C-w>j", { desc = "Go to down window"})
 -- Indent backward
-kmap("n", "<", "<<", { desc = "Indent backward (Normal mode)"})
+-- kmap("n", "<", "<<", { desc = "Indent backward (Normal mode)"})
 
 -- Indent forward
 kmap("n", ">", ">>", { desc = "Indent forward(Normal mode)"})
@@ -105,7 +126,12 @@ kmap("n", "<leader>pp", "<cmd>Lazy profile<CR>", { desc = "Lazy | Profile", sile
 kmap("n", "<leader>pu", "<cmd>Lazy update<CR>", { desc = "Lazy | Update", silent = true })
 
 -- Yazi
-kmap("n", "<leader>y", "<cmd>Yazi cwd <CR>", { desc = "Open the File Manager (cwd) "})
+-- kmap("n", "<leader>y", "<cmd>Yazi cwd <CR>", { desc = "Open the File Manager (cwd) "})
 -- Oil
 --vim.keymap.set("n", "-", ":Oil<CR>", { desc = "Open parent directory" })
 --vim.keymap.set( "n", "<leader>m", ":Oil --float<CR>", { desc = "Open Oil (floating)" })
+
+-- Fyler
+-- kmap("n", "<leader>-", "<cmd>Fyler<CR>", { desc = "Open the File Manager (cwd) "})
+kmap("n", "<leader>e", "<cmd>Fyler kind=split_left_most<CR>", { desc = "Open Fyler left"})
+kmap("n", "<leader>E", "<cmd>Fyler kind=split_left<CR>", { desc = "Fyler left (relative)"})
