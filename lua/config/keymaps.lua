@@ -8,6 +8,17 @@ kmap("n","j","jzz",{ noremap = true})
 kmap("n","k","kzz",{ noremap = true})
 kmap("n","l","lzz",{ noremap = true})
 kmap("n","h","hzz",{ noremap = true})
+kmap('n', "<C-u>", "<C-u>zz")
+kmap('n', "<C-d>", "<C-d>zz")
+kmap('n', "<C-f>", "<C-f>zz")
+kmap('n', "<C-b>", "<C-b>zz")
+kmap('n', "n", "nzzzv")
+kmap('n', "N", "Nzzzv")
+
+-- Move lines
+kmap('v', 'K', ":m '<-2<CR>gv=gv")
+kmap('v', 'J', ":m '>+1<CR>gv=gv")
+
 -- Copy file path
 kmap('n', '<leader>yp', ":let @+=expand('%:.')<cr>", { desc = 'Copy relative path' })
 
@@ -23,6 +34,9 @@ kmap("i", "", "<nop>", { silent = true})
 
 -- Toggle Wrap
 kmap("n", "<leader>u", "<cmd>set wrap!<CR>", { desc = "Wrap"})
+--
+-- Spell
+kmap("n", "<leader>S", "<cmd>set nospell!<CR>", { desc = "Spell"})
 
 -- Save Buffer
 kmap("n", "<leader>s", "<cmd>w<CR>", { desc = "Save"})
@@ -135,3 +149,11 @@ kmap("n", "<leader>pu", "<cmd>Lazy update<CR>", { desc = "Lazy | Update", silent
 -- kmap("n", "<leader>-", "<cmd>Fyler<CR>", { desc = "Open the File Manager (cwd) "})
 kmap("n", "<leader>e", "<cmd>Fyler kind=split_left_most<CR>", { desc = "Open Fyler left"})
 kmap("n", "<leader>E", "<cmd>Fyler kind=split_left<CR>", { desc = "Fyler left (relative)"})
+
+-- Remove search highlighting
+vim.keymap.set({ 'n', 'v', 'i' }, '<Esc>', function()
+    if vim.v.hlsearch == 1 then
+        vim.cmd 'nohlsearch | redraw!'
+    end
+    return '<Esc>'
+end, { desc = 'Remove search highlighting', expr = true, silent = true })
